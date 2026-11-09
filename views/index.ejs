@@ -1,0 +1,42 @@
+<%- include('partials/header') %>
+
+<section class="intro">
+  <h1>Find a spell or a monster in seconds</h1>
+  <p>Filter the D&amp;D 5e rules by level, challenge rating or name instead of paging through the books.</p>
+</section>
+
+<form class="search" action="/search" method="POST" novalidate data-search-form>
+  <% if (errors.length) { %>
+    <div class="alert" role="alert">
+      <strong>Fix this and search again:</strong>
+      <ul>
+        <% errors.forEach(function (e) { %><li><%= e %></li><% }); %>
+      </ul>
+    </div>
+  <% } %>
+
+  <fieldset class="choice">
+    <legend>What are you looking for?</legend>
+    <label><input type="radio" name="type" value="spell" <%= (values.type || 'spell') === 'spell' ? 'checked' : '' %>> Spells</label>
+    <label><input type="radio" name="type" value="monster" <%= values.type === 'monster' ? 'checked' : '' %>> Monsters</label>
+  </fieldset>
+
+  <div class="field" data-for="spell">
+    <label for="level">Spell level</label>
+    <input id="level" name="level" inputmode="numeric" maxlength="1" placeholder="0 to 9 (0 = cantrip)" value="<%= values.level || '' %>">
+  </div>
+
+  <div class="field" data-for="monster">
+    <label for="cr">Challenge rating</label>
+    <input id="cr" name="cr" maxlength="5" placeholder="1/8, 1/4, 1/2 or 0 to 30" value="<%= values.cr || '' %>">
+  </div>
+
+  <div class="field">
+    <label for="name">Name (optional if you set a level or rating)</label>
+    <input id="name" name="name" maxlength="50" placeholder="e.g. fire, dragon" value="<%= values.name || '' %>">
+  </div>
+
+  <button type="submit">Search the codex</button>
+</form>
+
+<%- include('partials/footer') %>

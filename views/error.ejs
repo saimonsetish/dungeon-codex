@@ -1,0 +1,9 @@
+<%- include('partials/header') %>
+
+<section class="empty">
+  <h1><%= status === 404 ? 'Nothing here' : 'Something went wrong' %></h1>
+  <p><%= message %></p>
+  <p><a href="/">Back to the search</a></p>
+</section>
+
+<%- include('partials/footer') %>

@@ -1,0 +1,49 @@
+<%- include('partials/header') %>
+
+<p class="back"><a href="javascript:history.back()">&larr; Back to results</a></p>
+<article class="statblock">
+  <header>
+    <h1><%= monster.name %></h1>
+    <p class="meta"><%= monster.size %> <%= monster.type %>, <%= monster.alignment %></p>
+  </header>
+
+  <% if (monster.image) { %>
+    <img class="portrait" src="<%= monster.image %>" alt="Illustration of <%= monster.name %>" width="240">
+  <% } %>
+
+  <dl class="facts">
+    <div><dt>Armor class</dt><dd><%= monster.ac != null ? monster.ac : 'n/a' %></dd></div>
+    <div><dt>Hit points</dt><dd><%= monster.hp %> (<%= monster.hitDice %>)</dd></div>
+    <div><dt>Speed</dt><dd><%= monster.speed.map(function (s) { return s.label + ' ' + s.value; }).join(', ') || 'n/a' %></dd></div>
+    <div><dt>Challenge</dt><dd><%= monster.crLabel %> (<%= monster.xp %> XP)</dd></div>
+  </dl>
+
+  <table class="abilities">
+    <thead><tr><% monster.abilities.forEach(function (a) { %><th scope="col"><%= a.label %></th><% }); %></tr></thead>
+    <tbody><tr><% monster.abilities.forEach(function (a) { %><td><%= a.score %> (<%= a.mod %>)</td><% }); %></tr></tbody>
+  </table>
+
+  <dl class="facts">
+    <% if (monster.senses.length) { %>
+      <div><dt>Senses</dt><dd><%= monster.senses.map(function (s) { return s.label + ' ' + s.value; }).join(', ') %></dd></div>
+    <% } %>
+    <% if (monster.languages) { %><div><dt>Languages</dt><dd><%= monster.languages %></dd></div><% } %>
+  </dl>
+
+  <% if (monster.specialAbilities.length) { %>
+    <h2>Traits</h2>
+    <% monster.specialAbilities.forEach(function (t) { %><p><strong><%= t.name %>.</strong> <%= t.desc %></p><% }); %>
+  <% } %>
+
+  <% if (monster.actions.length) { %>
+    <h2>Actions</h2>
+    <% monster.actions.forEach(function (a) { %><p><strong><%= a.name %>.</strong> <%= a.desc %></p><% }); %>
+  <% } %>
+
+  <% if (monster.legendaryActions.length) { %>
+    <h2>Legendary actions</h2>
+    <% monster.legendaryActions.forEach(function (a) { %><p><strong><%= a.name %>.</strong> <%= a.desc %></p><% }); %>
+  <% } %>
+</article>
+
+<%- include('partials/footer') %>

@@ -1,0 +1,8 @@
+<%# Card for one spell. Expects a variable called "spell". %>
+<a class="card spell-card school-<%= spell.schoolSlug %>" href="/spells/<%= spell.index %>">
+  <h3><%= spell.name %></h3>
+  <p class="meta"><%= spell.levelLabel %> &middot; <%= spell.school %></p>
+  <p class="small"><%= spell.castingTime %>, range <%= spell.range %></p>
+  <% if (spell.concentration) { %><span class="tag">Concentration</span><% } %>
+  <% if (spell.ritual) { %><span class="tag">Ritual</span><% } %>
+</a>

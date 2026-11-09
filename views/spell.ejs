@@ -1,0 +1,26 @@
+<%- include('partials/header') %>
+
+<p class="back"><a href="javascript:history.back()">&larr; Back to results</a></p>
+<article class="detail school-<%= spell.schoolSlug %>">
+  <h1><%= spell.name %></h1>
+  <p class="meta"><%= spell.levelLabel %> &middot; <%= spell.school %><%= spell.ritual ? ' (ritual)' : '' %></p>
+
+  <dl class="facts">
+    <div><dt>Casting time</dt><dd><%= spell.castingTime %></dd></div>
+    <div><dt>Range</dt><dd><%= spell.range %></dd></div>
+    <div><dt>Duration</dt><dd><%= spell.duration %><%= spell.concentration ? ' (concentration)' : '' %></dd></div>
+    <div><dt>Components</dt><dd><%= spell.components.join(', ') || 'none' %></dd></div>
+    <% if (spell.classes.length) { %><div><dt>Classes</dt><dd><%= spell.classes.join(', ') %></dd></div><% } %>
+  </dl>
+
+  <% if (spell.material) { %><p class="small"><strong>Materials:</strong> <%= spell.material %></p><% } %>
+
+  <% spell.description.forEach(function (p) { %><p><%= p %></p><% }); %>
+
+  <% if (spell.higherLevel.length) { %>
+    <h2>At higher levels</h2>
+    <% spell.higherLevel.forEach(function (p) { %><p><%= p %></p><% }); %>
+  <% } %>
+</article>
+
+<%- include('partials/footer') %>

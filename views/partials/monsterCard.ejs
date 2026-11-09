@@ -1,0 +1,13 @@
+<%# Card for one monster. Expects a variable called "monster". %>
+<a class="card monster-card" href="/monsters/<%= monster.index %>">
+  <% if (monster.image) { %>
+    <img src="<%= monster.image %>" alt="Illustration of <%= monster.name %>" loading="lazy" width="96" height="96">
+  <% } else { %>
+    <div class="no-image" aria-hidden="true"><%= monster.name.charAt(0) %></div>
+  <% } %>
+  <div>
+    <h3><%= monster.name %></h3>
+    <p class="meta"><%= monster.size %> <%= monster.type %></p>
+    <p class="small">CR <%= monster.crLabel %> &middot; HP <%= monster.hp %> &middot; AC <%= monster.ac != null ? monster.ac : 'n/a' %></p>
+  </div>
+</a>

@@ -1,0 +1,108 @@
+/* Dungeon Codex styles. Mobile first; breakpoints at the bottom. */
+:root {
+  --bg: #e4e7e1;
+  --surface: #f8f9f6;
+  --ink: #1d2731;
+  --muted: #55626d;
+  --line: #c3cac2;
+  --teal: #1f6f6b;
+  --wine: #7b2d3b;
+  --brass: #8f6718;
+  --serif: "Alegreya", Georgia, "Times New Roman", serif;
+  --sans: "Alegreya Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  /* one colour per school of magic: used as a left spine on cards */
+  --abjuration: #2f5f9e; --conjuration: #8a5a1f; --divination: #566570; --enchantment: #a23b72;
+  --evocation: #b5481f; --illusion: #6b4fa0; --necromancy: #3d6b3a; --transmutation: #1f7a7a;
+}
+
+* { box-sizing: border-box; }
+html { font-size: 18px; }
+body { margin: 0; background: var(--bg); color: var(--ink); font-family: var(--serif); line-height: 1.55; }
+h1, h2, h3 { font-family: var(--serif); line-height: 1.2; margin: 0 0 .4em; }
+h1 { font-size: 2rem; }
+h2 { font-size: 1.4rem; }
+h3 { font-size: 1.15rem; margin-bottom: .1em; }
+a { color: var(--teal); }
+a:focus-visible, button:focus-visible, input:focus-visible { outline: 3px solid var(--brass); outline-offset: 2px; }
+p { max-width: 70ch; }
+
+.skip { position: absolute; left: -999px; }
+.skip:focus { left: 1rem; top: 1rem; background: var(--surface); padding: .5rem 1rem; z-index: 10; }
+
+.wrap { max-width: 62rem; margin: 0 auto; padding: 1.5rem 1rem 3rem; }
+.site-header { display: flex; justify-content: space-between; align-items: center; padding: .9rem 1rem; background: var(--ink); }
+.site-header a { color: #f3f4ef; text-decoration: none; font-family: var(--sans); }
+.brand { font-family: var(--serif) !important; font-size: 1.5rem; font-weight: 700; letter-spacing: .02em; }
+.site-footer { text-align: center; color: var(--muted); padding: 1.5rem 1rem 2rem; font-family: var(--sans); font-size: .85rem; }
+.site-footer p { margin: 0 auto; }
+
+.muted, .meta, .small { color: var(--muted); }
+.meta { font-family: var(--sans); margin: 0 0 .2em; }
+.small { font-family: var(--sans); font-size: .9rem; margin: .2em 0; }
+.back { font-family: var(--sans); margin: 0 0 1rem; }
+
+/* ---- search form ---- */
+.intro { margin-bottom: 1.5rem; }
+.search { background: var(--surface); border: 1px solid var(--line); border-top: 4px solid var(--teal); padding: 1.25rem; max-width: 36rem; font-family: var(--sans); }
+.choice { border: 0; padding: 0; margin: 0 0 1rem; display: flex; gap: 1.5rem; flex-wrap: wrap; }
+.choice legend { font-weight: 700; margin-bottom: .4rem; padding: 0; }
+.choice label { display: inline-flex; align-items: center; gap: .4rem; cursor: pointer; }
+.field { margin-bottom: 1rem; }
+.field[hidden] { display: none; }
+.field label { display: block; font-weight: 700; margin-bottom: .25rem; }
+input[type="text"], input:not([type]), input[inputmode] { width: 100%; padding: .6rem .7rem; font: inherit; border: 1px solid #8a948c; background: #fff; color: var(--ink); }
+button { background: var(--teal); color: #fff; border: 0; padding: .7rem 1.4rem; font: 700 1rem var(--sans); cursor: pointer; }
+button:hover { background: #185a57; }
+
+.alert { background: #f6e3e5; border-left: 4px solid var(--wine); padding: .75rem 1rem; margin-bottom: 1rem; }
+.alert ul { margin: .3rem 0 0; padding-left: 1.2rem; }
+.notice { background: #f3ead2; border-left: 4px solid var(--brass); padding: .6rem 1rem; margin: 0 0 1rem; font-family: var(--sans); max-width: 70ch; }
+.empty { background: var(--surface); border: 1px dashed #8a948c; padding: 1.5rem; max-width: 36rem; }
+
+/* ---- results ---- */
+.grid { display: grid; grid-template-columns: 1fr; gap: .9rem; }
+.group { margin-bottom: 1.8rem; }
+.group-title { padding-left: .6rem; border-left: 6px solid var(--line); }
+.count { color: var(--muted); font-size: .9em; font-weight: 400; }
+
+.card { display: block; background: var(--surface); border: 1px solid var(--line); padding: .9rem 1rem; color: inherit; text-decoration: none; }
+.card:hover { border-color: var(--teal); }
+.spell-card { border-left: 6px solid var(--line); }
+.monster-card { display: flex; gap: .9rem; align-items: center; border-left: 6px solid var(--wine); }
+.monster-card img, .no-image { width: 72px; height: 72px; object-fit: contain; flex: none; background: #e9ece6; }
+.no-image { display: grid; place-items: center; font-size: 2rem; color: var(--wine); }
+.tag { display: inline-block; font: .8rem var(--sans); border: 1px solid var(--line); padding: 0 .4rem; margin-right: .3rem; }
+
+.stats { display: grid; grid-template-columns: 1fr; gap: .6rem; margin: 0 0 1.2rem; font-family: var(--sans); }
+.stats div { background: var(--surface); border: 1px solid var(--line); padding: .6rem .9rem; }
+.stats dt { color: var(--muted); font-size: .85rem; }
+.stats dd { margin: 0; font-weight: 700; font-size: 1.15rem; }
+
+/* school colours (spine on cards, rule under detail title) */
+.school-abjuration { border-left-color: var(--abjuration); } .school-conjuration { border-left-color: var(--conjuration); }
+.school-divination { border-left-color: var(--divination); } .school-enchantment { border-left-color: var(--enchantment); }
+.school-evocation { border-left-color: var(--evocation); } .school-illusion { border-left-color: var(--illusion); }
+.school-necromancy { border-left-color: var(--necromancy); } .school-transmutation { border-left-color: var(--transmutation); }
+
+/* ---- detail pages ---- */
+.detail, .statblock { background: var(--surface); border: 1px solid var(--line); padding: 1.4rem; max-width: 44rem; }
+.detail { border-left: 6px solid var(--line); }
+.statblock { border-top: 5px solid var(--wine); border-bottom: 5px solid var(--wine); }
+.statblock h2 { color: var(--wine); border-bottom: 1px solid var(--wine); margin-top: 1.2rem; }
+.statblock .portrait { float: right; max-width: 40%; height: auto; margin: 0 0 1rem 1rem; }
+.facts { margin: 1rem 0; font-family: var(--sans); }
+.facts div { display: flex; gap: .6rem; padding: .25rem 0; border-bottom: 1px solid var(--line); }
+.facts dt { font-weight: 700; min-width: 8rem; }
+.facts dd { margin: 0; }
+.abilities { width: 100%; border-collapse: collapse; margin: 1rem 0; text-align: center; font-family: var(--sans); clear: both; }
+.abilities th, .abilities td { padding: .35rem .2rem; border-bottom: 1px solid var(--line); }
+.abilities th { color: var(--wine); }
+
+@media (min-width: 40rem) {
+  .grid { grid-template-columns: repeat(2, 1fr); }
+  .stats { grid-template-columns: repeat(3, 1fr); }
+}
+@media (min-width: 60rem) {
+  .grid { grid-template-columns: repeat(3, 1fr); }
+}
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; animation: none !important; } }
