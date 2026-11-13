@@ -52,7 +52,7 @@ async function get(url, params = {}) {
 const clean = (obj) => Object.fromEntries(Object.entries(obj).filter(([, v]) => v !== '' && v != null));
 
 // API request type 1: list endpoints with filters (returns { count, results: [{index, name, url}] }).
-const searchSpells = ({ name, level }) => get('/api/spells', clean({ name, level }));
+const searchSpells = ({ name, level, school }) => get('/api/spells', clean({ name, level, school }));
 const searchMonsters = ({ name, cr }) => get('/api/monsters', clean({ name, challenge_rating: cr }));
 
 // API request type 2: detail endpoints.

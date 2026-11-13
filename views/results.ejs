@@ -6,6 +6,7 @@
   Search:
   <% if (query.name) { %>name "<%= query.name %>"<% } %>
   <% if (query.level !== '' && type === 'spell') { %> level <%= query.level %><% } %>
+  <% if (query.school && type === 'spell') { %> school <%= query.school %><% } %>
   <% if (query.cr !== '' && type === 'monster') { %> challenge rating <%= query.cr %><% } %>
 </p>
 

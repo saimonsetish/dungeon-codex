@@ -26,13 +26,23 @@
     <input id="level" name="level" inputmode="numeric" maxlength="1" placeholder="0 to 9 (0 = cantrip)" value="<%= values.level || '' %>">
   </div>
 
+  <div class="field" data-for="spell">
+    <label for="school">School of magic</label>
+    <select id="school" name="school">
+      <option value="">Any school</option>
+      <% ['Abjuration', 'Conjuration', 'Divination', 'Enchantment', 'Evocation', 'Illusion', 'Necromancy', 'Transmutation'].forEach(function (s) { %>
+        <option value="<%= s %>" <%= values.school === s ? 'selected' : '' %>><%= s %></option>
+      <% }); %>
+    </select>
+  </div>
+
   <div class="field" data-for="monster">
     <label for="cr">Challenge rating</label>
     <input id="cr" name="cr" maxlength="5" placeholder="1/8, 1/4, 1/2 or 0 to 30" value="<%= values.cr || '' %>">
   </div>
 
   <div class="field">
-    <label for="name">Name (optional if you set a level or rating)</label>
+    <label for="name">Name (optional if you set a filter above)</label>
     <input id="name" name="name" maxlength="50" placeholder="e.g. fire, dragon" value="<%= values.name || '' %>">
   </div>
 

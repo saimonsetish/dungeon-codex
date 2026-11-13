@@ -5,11 +5,15 @@
 const VALID_CR = new Set(['0', '0.125', '0.25', '0.5', ...Array.from({ length: 30 }, (_, i) => String(i + 1))]);
 const CR_FRACTIONS = { '1/8': '0.125', '1/4': '0.25', '1/2': '0.5' };
 
+// The eight schools of magic (values sent to the API's ?school= filter).
+const SCHOOLS = ['Abjuration', 'Conjuration', 'Divination', 'Enchantment', 'Evocation', 'Illusion', 'Necromancy', 'Transmutation'];
+
 module.exports = function validateSearch(req, res, next) {
   const type = String(req.body.type || '').trim();
   const name = String(req.body.name || '').trim();
   const level = String(req.body.level || '').trim();
   const crRaw = String(req.body.cr || '').trim();
+  const school = String(req.body.school || '').trim();
   const errors = [];
 
   if (!['spell', 'monster'].includes(type)) {
@@ -28,6 +32,11 @@ module.exports = function validateSearch(req, res, next) {
     errors.push('Spell level must be a whole number from 0 (cantrip) to 9.');
   }
 
+  // School of magic (spells only): empty means "any school", otherwise it must be in our list.
+  if (type === 'spell' && school !== '' && !SCHOOLS.includes(school)) {
+    errors.push('Choose a school of magic from the list.');
+  }
+
   // Challenge rating: accept 1/8, 1/4, 1/2 or a number 0-30.
   let cr = '';
   if (type === 'monster' && crRaw !== '') {
@@ -38,10 +47,10 @@ module.exports = function validateSearch(req, res, next) {
   }
 
   // At least one filter is needed, otherwise we would request the whole database.
-  const filter = type === 'spell' ? level : crRaw;
+  const filter = type === 'spell' ? level + school : crRaw;
   if (['spell', 'monster'].includes(type) && !name && filter === '') {
     errors.push(type === 'spell'
-      ? 'Enter a spell name or a spell level.'
+      ? 'Enter a spell name, a spell level or a school of magic.'
       : 'Enter a monster name or a challenge rating.');
   }
 
@@ -50,10 +59,10 @@ module.exports = function validateSearch(req, res, next) {
     return res.status(400).render('index', {
       pageTitle: 'Search the Codex',
       errors,
-      values: { type, name, level, cr: crRaw },
+      values: { type, name, level, school, cr: crRaw },
     });
   }
 
-  req.search = { type, name, level: type === 'spell' ? level : '', cr: type === 'monster' ? cr : '' };
+  req.search = { type, name, level: type === 'spell' ? level : '', school: type === 'spell' ? school : '', cr: type === 'monster' ? cr : '' };
   next();
 };
