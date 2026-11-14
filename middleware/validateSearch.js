@@ -9,11 +9,14 @@ const CR_FRACTIONS = { '1/8': '0.125', '1/4': '0.25', '1/2': '0.5' };
 const SCHOOLS = ['Abjuration', 'Conjuration', 'Divination', 'Enchantment', 'Evocation', 'Illusion', 'Necromancy', 'Transmutation'];
 
 module.exports = function validateSearch(req, res, next) {
-  const type = String(req.body.type || '').trim();
-  const name = String(req.body.name || '').trim();
-  const level = String(req.body.level || '').trim();
-  const crRaw = String(req.body.cr || '').trim();
-  const school = String(req.body.school || '').trim();
+  // First search comes from the form (POST body); pager links use the URL (GET query).
+  const src = req.method === 'GET' ? req.query : (req.body || {});
+  const type = String(src.type || '').trim();
+  const name = String(src.name || '').trim();
+  const level = String(src.level || '').trim();
+  const crRaw = String(src.cr || '').trim();
+  const school = String(src.school || '').trim();
+  const page = Math.max(1, parseInt(src.page, 10) || 1); // missing or invalid page -> 1
   const errors = [];
 
   if (!['spell', 'monster'].includes(type)) {
@@ -63,6 +66,6 @@ module.exports = function validateSearch(req, res, next) {
     });
   }
 
-  req.search = { type, name, level: type === 'spell' ? level : '', school: type === 'spell' ? school : '', cr: type === 'monster' ? cr : '' };
+  req.search = { page, type, name, level: type === 'spell' ? level : '', school: type === 'spell' ? school : '', cr: type === 'monster' ? cr : '' };
   next();
 };

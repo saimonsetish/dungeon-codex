@@ -18,7 +18,8 @@ const checkIndex = (req, res, next, value) => {
 router.param('index', checkIndex);
 
 router.get('/', searchController.home);                          // home page + form
-router.post('/search', validateSearch, searchController.search); // validate -> API -> results
+router.post('/search', validateSearch, searchController.search); // validate -> API -> results (page 1)
+router.get('/search', validateSearch, searchController.search);  // same, used by the pager links (?page=2)
 router.get('/spells/:index', spellController.show);              // spell details
 router.get('/monsters/:index', monsterController.show);          // monster details
 
