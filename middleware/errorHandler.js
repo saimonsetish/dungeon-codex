@@ -17,10 +17,15 @@ function errorHandler(err, req, res, next) {
   if (res.headersSent) return next(err);
 
   const status = err.status || 500;
-  // Only AppError messages are written for users; anything else gets a generic message.
-  const message = err.name === 'AppError'
-    ? err.message
-    : 'Something went wrong on our side. Please try again in a moment.';
+  // Only AppError messages are written for users; other errors get a generic message.
+  let message;
+  if (err.name === 'AppError') {
+    message = err.message;
+  } else if (status >= 400 && status < 500) {
+    message = 'The request could not be understood. Please check it and try again.'; // e.g. malformed JSON body
+  } else {
+    message = 'Something went wrong on our side. Please try again in a moment.';
+  }
 
   res.status(status).render('error', { pageTitle: 'Error', status, message });
 }

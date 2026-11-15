@@ -1,0 +1,8 @@
+<%# Previous / Next navigation. Expects a variable called "pager". Hidden when there is only one page. %>
+<% if (pager.totalPages > 1) { %>
+  <nav class="pager" aria-label="Pagination">
+    <% if (pager.prevUrl) { %><a class="pager-link" href="<%= pager.prevUrl %>" rel="prev">&larr; Previous</a><% } else { %><span class="pager-link off">&larr; Previous</span><% } %>
+    <span class="pager-info">Page <%= pager.page %> of <%= pager.totalPages %></span>
+    <% if (pager.nextUrl) { %><a class="pager-link" href="<%= pager.nextUrl %>" rel="next">Next &rarr;</a><% } else { %><span class="pager-link off">Next &rarr;</span><% } %>
+  </nav>
+<% } %>

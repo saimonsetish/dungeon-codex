@@ -10,15 +10,16 @@ Built for **VR 113153 Web Development II** (Individual Project) with Express, No
 
 | Request | Purpose |
 |---|---|
-| `GET /api/spells?level={n}&name={text}` | filtered list of spells |
+| `GET /api/spells?level={n}&school={name}&name={text}` | filtered list of spells |
 | `GET /api/spells/{index}` | spell details |
 | `GET /api/monsters?challenge_rating={n}&name={text}` | filtered list of monsters |
 | `GET /api/monsters/{index}` | monster details (HP, AC, abilities, image) |
 
 ## Features
 
-- Search spells (by level and/or name) or monsters (by challenge rating and/or name)
-- Server-side validation with clear messages (empty form, level outside 0-9, invalid challenge rating, unsafe characters)
+- Search spells (by level, school of magic and/or name) or monsters (by challenge rating and/or name)
+- Pagination: 12 results per page with Previous/Next links that keep the filters
+- Server-side validation with clear messages (empty form, level outside 0-9, unknown school, invalid challenge rating, unsafe characters)
 - Spells are sorted by level and grouped by school of magic
 - Monsters are sorted by challenge rating; average HP and AC of the results are calculated
 - Detail pages: spell description and components, monster stat block with ability modifiers
@@ -31,7 +32,8 @@ Built for **VR 113153 Web Development II** (Individual Project) with Express, No
 | Method | Path | Description |
 |---|---|---|
 | GET | `/` | Home page with the search form |
-| POST | `/search` | Validates input, calls the API, shows the results list |
+| POST | `/search` | Validates the form, calls the API, shows the first page of results |
+| GET | `/search?...&page=N` | Same search for other pages (used by the Previous/Next links) |
 | GET | `/spells/:index` | Spell details |
 | GET | `/monsters/:index` | Monster details |
 | any | `*` | 404 page |

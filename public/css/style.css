@@ -99,6 +99,13 @@ button:hover { background: #185a57; }
 .abilities th, .abilities td { padding: .35rem .2rem; border-bottom: 1px solid var(--line); }
 .abilities th { color: var(--wine); }
 
+/* ---- pagination ---- */
+.pager { display: flex; justify-content: space-between; align-items: center; gap: .8rem; margin-top: 1.5rem; font-family: var(--sans); }
+.pager-link { padding: .5rem 1rem; border: 1px solid var(--teal); color: var(--teal); text-decoration: none; font-weight: 700; background: var(--surface); }
+.pager-link:hover { background: var(--teal); color: #fff; }
+.pager-link.off { border-color: var(--line); color: #8a948c; background: transparent; }
+.pager-info { color: var(--muted); }
+
 @media (min-width: 40rem) {
   .grid { grid-template-columns: repeat(2, 1fr); }
   .stats { grid-template-columns: repeat(3, 1fr); }

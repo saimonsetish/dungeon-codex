@@ -13,9 +13,6 @@
 <% if (failed > 0) { %>
   <div class="notice" role="status"><%= failed %> result<%= failed === 1 ? '' : 's' %> could not be loaded and <%= failed === 1 ? 'is' : 'are' %> missing below.</div>
 <% } %>
-<% if (total > shown + failed) { %>
-  <div class="notice" role="status">Showing the first <%= shown %> of <%= total %>. Add a name or a narrower filter to see others.</div>
-<% } %>
 
 <% if (shown === 0) { %>
   <div class="empty">
@@ -36,14 +33,16 @@
 <% } else { %>
   <% if (stats) { %>
     <dl class="stats">
-      <div><dt>Average HP</dt><dd><%= stats.avgHp %></dd></div>
-      <div><dt>Average AC</dt><dd><%= stats.avgAc %></dd></div>
-      <div><dt>Toughest shown</dt><dd><%= stats.strongest.name %> (CR <%= stats.strongest.crLabel %>)</dd></div>
+      <div><dt>Average HP (this page)</dt><dd><%= stats.avgHp %></dd></div>
+      <div><dt>Average AC (this page)</dt><dd><%= stats.avgAc %></dd></div>
+      <div><dt>Toughest on this page</dt><dd><%= stats.strongest.name %> (CR <%= stats.strongest.crLabel %>)</dd></div>
     </dl>
   <% } %>
   <div class="grid">
     <% monsters.forEach(function (monster) { %><%- include('partials/monsterCard', { monster: monster }) %><% }); %>
   </div>
 <% } %>
+
+<% if (shown > 0) { %><%- include('partials/pager', { pager: pager }) %><% } %>
 
 <%- include('partials/footer') %>
