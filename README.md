@@ -65,7 +65,17 @@ Open http://localhost:3000. `.env` holds `PORT` and `API_BASE_URL`; no API key i
 
 ## Screenshots
 
-_Add 2-3 screenshots here (home page, results, monster detail)._
+**Home page: search form**
+
+![Home page with the search form](docs/home.png)
+
+**Results: spells of the Evocation school, grouped and color-coded**
+
+![Spell results for the Evocation school](docs/results.png)
+
+**Details page: a spell**
+
+![Spell details page for Dancing Lights](docs/spell.png)
 
 ## Credits
 
