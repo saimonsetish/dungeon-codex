@@ -1,4 +1,5 @@
-// Service layer: the ONLY file that talks to the D&D 5e API (via Axios).
+// Service layer = the Model of this MVC app: the ONLY file that talks to the D&D 5e API (via Axios).
+// The data comes from an external API instead of a database, so there is no separate models/ folder.
 // Controllers call these functions and never use Axios directly.
 const axios = require('axios');
 const AppError = require('../utils/AppError');

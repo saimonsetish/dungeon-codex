@@ -51,6 +51,14 @@ views/ (+ partials/)        EJS templates
 public/                     css and client script
 ```
 
+## MVC mapping
+
+| Layer | Where | What it does |
+|---|---|---|
+| Model | `services/dndService.js`, `utils/format.js` | Gets data from the D&D 5e API with Axios (the data source is an external API, not a database, so the service layer plays the role of the model) and shapes it for the views |
+| View | `views/` (EJS + partials) | Renders pages: forms, result cards, detail pages, error page |
+| Controller | `controllers/` (+ `routes/`, `middleware/`) | Receives the request, calls the service, sorts/groups/calculates, picks the view |
+
 ## Installation
 
 Requires Node.js 18 or newer.
